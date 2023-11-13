@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Controller\Admin\UserCrudController;
+use App\Entity\DienThoai;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -22,6 +23,7 @@ class DashboardController extends AbstractDashboardController
         //
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
         return $this->redirect($adminUrlGenerator->setController(UserCrudController::class)->generateUrl());
+        //return $this->redirect($adminUrlGenerator->setController(DienThoaiCrudController::class)->generateUrl());
         // return $this->redirect($adminUrlGenerator->setController(OneOfYourCrudController::class)->generateUrl());
 
         // Option 2. You can make your dashboard redirect to different pages depending on the user
@@ -44,8 +46,9 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('User', 'fas fa-user', User::class);
+        yield MenuItem::linkToDashboard('Trang chủ', 'fa fa-home');
+        yield MenuItem::linkToCrud('Người dùng', 'fas fa-user', User::class);
+        yield MenuItem::linkToCrud('Điện thoại', 'fas fa-list', DienThoai::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

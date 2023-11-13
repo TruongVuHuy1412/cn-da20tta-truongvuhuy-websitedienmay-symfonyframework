@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -26,6 +28,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $username = null;
+
+    #[ORM\ManyToMany(targetEntity: DienThoai::class, mappedBy: 'user_id')]
+    private Collection $dienthoais;
+
+    public function __construct()
+    {
+        $this->dienthoais = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -95,5 +108,44 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): static
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Dienthoai>
+     */
+    public function getDienthoais(): Collection
+    {
+        return $this->dienthoais;
+    }
+
+    public function addDienthoai(Dienthoai $dienthoai): static
+    {
+        if (!$this->dienthoais->contains($dienthoai)) {
+            $this->dienthoais->add($dienthoai);
+            $dienthoai->addUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDienthoai(Dienthoai $dienthoai): static
+    {
+        if ($this->dienthoais->removeElement($dienthoai)) {
+            $dienthoai->removeUserId($this);
+        }
+
+        return $this;
     }
 }
