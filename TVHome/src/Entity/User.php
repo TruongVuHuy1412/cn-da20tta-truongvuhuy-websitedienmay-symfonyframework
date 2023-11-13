@@ -6,10 +6,12 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -18,7 +20,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
-    private ?string $email = null;
+    private ?string $username = null;
 
     #[ORM\Column]
     private array $roles = [];
@@ -29,15 +31,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $username = null;
-
     #[ORM\ManyToMany(targetEntity: DienThoai::class, mappedBy: 'user_id')]
-    private Collection $dienthoais;
+    private Collection $dienThoais;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $created_at = null;
 
     public function __construct()
     {
-        $this->dienthoais = new ArrayCollection();
+        $this->dienThoais = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -45,14 +47,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    public function getUsername(): ?string
     {
-        return $this->email;
+        return $this->username;
     }
 
-    public function setEmail(string $email): static
+    public function setUsername(string $username): static
     {
-        $this->email = $email;
+        $this->username = $username;
 
         return $this;
     }
@@ -64,7 +66,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string) $this->username;
     }
 
     /**
@@ -110,41 +112,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): static
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
     /**
-     * @return Collection<int, Dienthoai>
+     * @return Collection<int, DienThoai>
      */
-    public function getDienthoais(): Collection
+    public function getDienThoais(): Collection
     {
-        return $this->dienthoais;
+        return $this->dienThoais;
     }
 
-    public function addDienthoai(Dienthoai $dienthoai): static
+    public function addDienThoai(DienThoai $dienThoai): static
     {
-        if (!$this->dienthoais->contains($dienthoai)) {
-            $this->dienthoais->add($dienthoai);
-            $dienthoai->addUserId($this);
+        if (!$this->dienThoais->contains($dienThoai)) {
+            $this->dienThoais->add($dienThoai);
+            $dienThoai->addUserId($this);
         }
 
         return $this;
     }
 
-    public function removeDienthoai(Dienthoai $dienthoai): static
+    public function removeDienThoai(DienThoai $dienThoai): static
     {
-        if ($this->dienthoais->removeElement($dienthoai)) {
-            $dienthoai->removeUserId($this);
+        if ($this->dienThoais->removeElement($dienThoai)) {
+            $dienThoai->removeUserId($this);
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    {
+        $this->created_at = $created_at;
 
         return $this;
     }

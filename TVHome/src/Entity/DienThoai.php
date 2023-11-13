@@ -18,8 +18,11 @@ class DienThoai
     #[ORM\Column(length: 255)]
     private ?string $TenDienThoai = null;
 
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'dienthoais')]
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'dienThoais')]
     private Collection $user_id;
+
+    #[ORM\Column(length: 10)]
+    private ?string $GiaTien = null;
 
     public function __construct()
     {
@@ -63,6 +66,18 @@ class DienThoai
     public function removeUserId(User $userId): static
     {
         $this->user_id->removeElement($userId);
+
+        return $this;
+    }
+
+    public function getGiaTien(): ?string
+    {
+        return $this->GiaTien;
+    }
+
+    public function setGiaTien(string $GiaTien): static
+    {
+        $this->GiaTien = $GiaTien;
 
         return $this;
     }
