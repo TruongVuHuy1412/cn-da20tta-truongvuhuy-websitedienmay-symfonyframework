@@ -1,23 +1,77 @@
-{% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+
+<title>{% block title %}Đăng ký{% endblock %}</title>
 
 {% block body %}
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet"/>
 
-    <h1>Register</h1>
+<section class="vh-100" style="background-color: #508bfc;">
+    <div class="container py-5 h-200">
+        <div class="row d-flex justify-content-center align-items-center h-200">
+          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+              <div class="card-body p-5 text-center">
+               
+                {{ form_start(registrationForm) }}
+                <form name="registration_form" method="post">
+                    <h3 class="mb-5">Đăng kí tài khoản</h3>
+                    {{ form_errors(registrationForm) }}
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <input type="text" id="registration_form_last_name" class="form-control form-control-lg" name="registration_form[last_name]" required="required"/>
+                          <label class="form-label" for="registration_form_last_name" >Họ</label>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <input type="text" id="registration_form_name" class="form-control form-control-lg" name="registration_form[name]" required="required"/>
+                          <label class="form-label" for="registration_form_name">Tên</label>
+                        </div>
+                      </div>
+                    </div>
 
-    {{ form_errors(registrationForm) }}
+                    <div class="form-outline mb-4">
+                      <input type="text" id="registration_form_username" class="form-control form-control-lg" name="registration_form[username]" required="required"/>
+                      <label class="form-label" for="registration_form_username">Tên tài khoản</label>
+                    </div>
+        
+                    <div class="form-outline mb-4">
+                      <input type="password" id="registration_form_plainPassword_first" class="form-control form-control-lg" name="registration_form[plainPassword][first]" required="required"/>
+                      <label class="form-label" for="registration_form_plainPassword_first">Mật khẩu</label>
+                    </div>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                    <div class="form-outline mb-4">
+                        <input type="password" id="registration_form_plainPassword_second" class="form-control form-control-lg" name="registration_form[plainPassword][second]" required="required"/>
+                        <label class="form-label" for="registration_form_plainPassword_second">Nhập lại mật khẩu</label>
+                    </div>
+        
+                    <!-- Checkbox -->
+                    <div class="form-check d-flex justify-content-left mb-4">
+                      <input class="form-check-input me-2" type="checkbox" value="" id="registration_form_agreeTerms" name="registration_form[agreeTerms]" required="required" value="1" checked="checked" />
+                      <label class="form-check-label" for="registration_form_agreeTerms">
+                        Đồng ý với các Điều khoản của chúng tôi
+                      </label>
+                    </div>
+        
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-lg btn-block mb-4 ">
+                      Đăng ký
+                    </button>
+                    <div class="text-center mb-2">
+                        <p>Đã có tài khoản ? <a href="/login">Đăng nhập</a></p>
+                    </div>
+                    <input type="hidden" id="registration_form__token" name="registration_form[_token]" value="c5c3c35c3f2af80f7b55734585.OU8aSNNLm7VUUG_5Bhr-gJtCBE4m9MxfnvbA-LxsztM.ASBwL-Qzq88ZaA69P3HL1OkIMiVKnqQN6qeJoY9dm5FtBy0QgAjSzCIZJg">
+                    </div>
+                  </form>
+                  {{ form_end(registrationForm) }}
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</section>
+    
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
 {% endblock %}

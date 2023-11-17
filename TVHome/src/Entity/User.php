@@ -37,6 +37,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
+    #[ORM\Column(length: 10)]
+    private ?string $Last_name = null;
+
+    #[ORM\Column(length: 10)]
+    private ?string $Name = null;
+
     public function __construct()
     {
         $this->dienThoais = new ArrayCollection();
@@ -147,6 +153,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(\DateTimeImmutable $created_at): static
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->Last_name;
+    }
+
+    public function setLastName(string $Last_name): static
+    {
+        $this->Last_name = $Last_name;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->Name;
+    }
+
+    public function setName(string $Name): static
+    {
+        $this->Name = $Name;
 
         return $this;
     }
