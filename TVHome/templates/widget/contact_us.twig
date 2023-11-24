@@ -3,31 +3,19 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Liên hệ với chúng tôi</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
       </div>
       <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Họ và tên:</label>
-            <input type="text" class="form-control" id="recipient-name" />
-          </div>
-          <div class="mb-3">
-            <label for="recipient-email" class="col-form-label">Email:</label>
-            <input type="text" class="form-control" id="recipient-email" />
-          </div>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Tiêu đề:</label>
-            <input type="text" class="form-control" id="recipient-name" />
-          </div>
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label">Lời nhắn:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Đóng</button>
-        <button type="button" class="btn btn-primary">Gửi</button>
+        {% if successMessage is not null %}
+        <div class="alert alert-primary" role="alert">
+          {{ successMessage }}
+        </div>
+        {% else %}
+          {{ form_start(form, {action: path('app_contactus')}) }}
+          {{ form(form) }}
+        {% endif %}
       </div>
     </div>
   </div>
 </div>
+<script src="{{asset('assets/js/contactform.js')}}"></script>

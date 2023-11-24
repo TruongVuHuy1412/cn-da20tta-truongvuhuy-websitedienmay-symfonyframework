@@ -74,7 +74,7 @@
             </div>
             
         </header>
-        {{include('widget/contact_us.twig')}}
+        {{render(controller('App\\Controller\\ContactUsController::index'))}}
         {% block body %}
         
         {% endblock %}
