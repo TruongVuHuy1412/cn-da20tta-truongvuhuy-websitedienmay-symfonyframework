@@ -1,0 +1,61 @@
+
+
+<title>{% block title %}TVHome{% endblock %}</title>
+
+{% block body %}
+<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+<link rel="stylesheet" href="assets/css/main.css" />
+<link rel="icon" href="assets/favicon.svg">
+
+<header class="header navbar-area">
+    <div class="topbar">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 col-md-4 col-12">
+                    <div class="top-left">
+                        <ul class="menu-top-link">
+                            <li>
+                                <div class="select-position">
+                                    <select id="select4">
+                                        <option value="0" selected>$ VND</option>
+                                        <option value="2">$ USD</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="select-position">
+                                    <select id="select5">
+                                        <option value="0" selected>tiếng Việt</option>
+                                        <option value="1">English</option>
+                                    </select>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-12">
+                    <div class="top-middle">
+                        <ul class="useful-links">
+                            <li><a href="/">Trang chủ</a></li>
+                            <li><a href="#">Giới thiệu</a></li>
+                            <li><a href="#" >Liên hệ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-12">
+                    <div class="top-end">
+                        <ul class="user-login">
+                            <li>
+                                <a href="#">Tài khoản</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_logout') }}">Đăng xuất</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
