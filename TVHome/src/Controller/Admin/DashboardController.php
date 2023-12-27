@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\DienThoai;
+use App\Entity\Product;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -45,7 +46,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Trang chủ', 'fa fa-home');
         yield MenuItem::linkToCrud('Người dùng', 'fas fa-user', User::class);
-        yield MenuItem::linkToCrud('Điện thoại', 'fas fa-list', DienThoai::class);
+        yield MenuItem::linkToCrud('Sản phẩm', 'fas fa-list', Product::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

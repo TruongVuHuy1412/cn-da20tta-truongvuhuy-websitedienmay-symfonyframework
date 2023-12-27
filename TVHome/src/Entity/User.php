@@ -5,21 +5,26 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
+#[UniqueEntity(fields: ['username'], message: 'Tên người dùng đã được sử dụng !')]
+
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\Column(type:'uuid', unique:true)]
+    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+    private ?Uuid $id = null;
 
-    #[ORM\Column(length: 180, unique: true)]
+    #[ORM\Column(unique: true)]
     private ?string $username = null;
 
     #[ORM\Column]
@@ -31,9 +36,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\ManyToMany(targetEntity: DienThoai::class, mappedBy: 'user_id')]
-    private Collection $dienThoais;
-
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
@@ -43,14 +45,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 10)]
     private ?string $Name = null;
 
-    public function __construct()
-    {
-        $this->dienThoais = new ArrayCollection();
-    }
+    /**
+     * A non-persisted field that's used to create the encoded password.
+     *
+     * @var string
+     */
+    private $plainPassword;
 
-    public function getId(): ?int
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+    }
+    
+
+    public function getId(): ?Uuid
     {
         return $this->id;
+    }
+
+    public function setId(Uuid $id): static
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getUsername(): ?string
@@ -115,35 +136,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
-    /**
-     * @return Collection<int, DienThoai>
-     */
-    public function getDienThoais(): Collection
-    {
-        return $this->dienThoais;
-    }
-
-    public function addDienThoai(DienThoai $dienThoai): static
-    {
-        if (!$this->dienThoais->contains($dienThoai)) {
-            $this->dienThoais->add($dienThoai);
-            $dienThoai->addUserId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDienThoai(DienThoai $dienThoai): static
-    {
-        if ($this->dienThoais->removeElement($dienThoai)) {
-            $dienThoai->removeUserId($this);
-        }
-
-        return $this;
-    }
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
@@ -180,4 +175,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+ 
 }

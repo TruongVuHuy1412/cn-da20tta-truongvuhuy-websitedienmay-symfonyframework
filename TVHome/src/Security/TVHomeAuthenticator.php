@@ -15,6 +15,8 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Symfony\Component\Uid\Uuid;
+use App\Entity\User;
 
 class TVHomeAuthenticator extends AbstractLoginFormAuthenticator
 {
@@ -31,7 +33,9 @@ class TVHomeAuthenticator extends AbstractLoginFormAuthenticator
         $username = $request->request->get('username', '');
 
         $request->getSession()->set(Security::LAST_USERNAME, $username);
-
+        $uuid = Uuid::v4();
+        $user = new User();
+        $user -> setId($uuid);
         return new Passport(
             new UserBadge($username),
             new PasswordCredentials($request->request->get('password', '')),
@@ -49,7 +53,7 @@ class TVHomeAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         // For example:
-         return new RedirectResponse($this->urlGenerator->generate('app_homepage_user'));
+         return new RedirectResponse($this->urlGenerator->generate('user'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
