@@ -39,10 +39,14 @@
                 </div>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 <button type="submit" class="btn btn-primary btn-lg btn-block mb-4">Đăng nhập</button>
-                <div class="text-center mb-2">
+                <div class="text-center mb-1">
                     <p>Chưa có tài khoản ? <a href="/register">Đăng ký</a></p>
+                    <p>hoặc</p>
                 </div>
-                  
+                
+                <a class="btn btn-primary btn-lg btn-block" style="background-color: #db4a39" href="#!"
+                    role="button">
+                    <i class="fab fa-twitter me-2"></i>Đăng nhập với Google</a>
                 </form>
                 
               </div>

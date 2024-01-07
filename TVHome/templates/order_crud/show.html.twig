@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Order{% endblock %}
+
+{% block body %}
+    <h1>Order</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ order.id }}</td>
+            </tr>
+            <tr>
+                <th>CreateAt</th>
+                <td>{{ order.CreateAt ? order.CreateAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Fullname</th>
+                <td>{{ order.Fullname }}</td>
+            </tr>
+            <tr>
+                <th>PhoneNumber</th>
+                <td>{{ order.PhoneNumber }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ order.Address }}</td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td>{{ order.Message }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_order_crud_index') }}">back to list</a>
+
+    <a href="{{ path('app_order_crud_edit', {'id': order.id}) }}">edit</a>
+
+    {{ include('order_crud/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,5 +1,7 @@
 
-<title>{% block title %}Giỏ hàng{% endblock %}</title>
+{% extends 'base.html.twig' %}
+
+{% block title %}Tài khoản{% endblock %}
 
 {% block body %}
 <!-- Font Awesome -->
@@ -20,57 +22,74 @@
 <link rel="stylesheet" href="assets/css/main.css" />
 <link rel="icon" href="assets/favicon.svg">
 
-<header class="header navbar-area">
-    <div class="topbar">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-4 col-md-4 col-12">
-                    <div class="top-left">
-                        <ul class="menu-top-link">
-                            <li>
-                                <div class="select-position">
-                                    <select id="select4">
-                                        <option value="0" selected>$ VND</option>
-                                        <option value="2">$ USD</option>
-                                    </select>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="select-position">
-                                    <select id="select5">
-                                        <option value="0" selected>tiếng Việt</option>
-                                        <option value="1">English</option>
-                                    </select>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+<div class="container-xl px-4 mt-4">
+    <!-- Account page navigation-->
+    
+    <hr class="mt-0 mb-4">
+    <div class="row">
+        <div class="col-xl-4">
+            <!-- Profile picture card-->
+            <div class="card mb-4 mb-xl-0">
+                <div class="card-header">Ảnh đại diện</div>
+                <div class="card-body text-center">
+                    <!-- Profile picture image-->
+                    <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                    <!-- Profile picture help block-->
+                    <!-- Profile picture upload button-->
+                    <button class="btn btn-primary" type="button">Cập nhật ảnh đại diện</button>
                 </div>
-                <div class="col-lg-4 col-md-4 col-12">
-                    <div class="top-middle">
-                        <ul class="useful-links">
-                            <li><a href="/user">Trang chủ</a></li>
-                            <li><a href="#">Giới thiệu</a></li>
-                            <li><a href="#" >Liên hệ</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-12">
-                    <div class="top-end">
-                        <ul class="user-login">
-                            <li>
-                                <a href="/profile">Tài khoản của tôi</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('app_logout') }}">Đăng xuất</a>
-                            </li>
-                        </ul>
-                    </div>
+            </div>
+        </div>
+        <div class="col-xl-8">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">Thông tin tài khoản</div>
+                <div class="card-body">
+                    <form>
+                        <!-- Form Group (username)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputUsername">Tên tài khoản </label>
+                            <input class="form-control" id="inputUsername" type="text" placeholder="Nhập tên tài khoản" value={{app.user.username}}>
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (first name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputFirstName">Tên</label>
+                                <input class="form-control" id="inputFirstName" type="text" placeholder="Nhập tên" value={{app.user.Name}}>
+                            </div>
+                            <!-- Form Group (last name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLastName">Họ</label>
+                                <input class="form-control" id="inputLastName" type="text" placeholder="Nhập họ" value={{app.user.Lastname}}>
+                            </div>
+                        </div>
+
+                        <!-- Form Group (email address)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputEmailAddress">Email</label>
+                            <input class="form-control" id="inputEmailAddress" type="email" placeholder="Nhập Email" value={{app.user.Email}}>
+                        </div>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (phone number)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputPhone">Số điện thoại</label>
+                                <input class="form-control" id="inputPhone" type="tel" placeholder="Nhập số điện thoại" value={{app.user.Phonenumber}}>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLocation">Địa chỉ</label>
+                                <input class="form-control" id="inputLocation" type="text" placeholder="Nhập địa chỉ" value={{app.user.Address}}>
+                            </div>
+                        </div>
+                        <!-- Save changes button-->
+                        <button class="btn btn-primary" type="button">Lưu</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</header>
+</div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
 {% endblock %}

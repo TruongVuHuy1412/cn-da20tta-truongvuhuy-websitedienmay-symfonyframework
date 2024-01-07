@@ -26,6 +26,13 @@ class OrderItem
     #[ORM\JoinColumn(nullable: false)]
     private ?Order $Ordered = null;
 
+    #[ORM\ManyToOne(inversedBy: 'Item')]
+    private ?OrderCart $orderCart = null;
+
+    #[ORM\ManyToOne(inversedBy: 'Item')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?OrderCart $OrderRef = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,5 +94,29 @@ class OrderItem
     public function getTotal(): float
     {
         return $this->getProduct()->getPrice() * $this->getQuantity();
+    }
+
+    public function getOrderCart(): ?OrderCart
+    {
+        return $this->orderCart;
+    }
+
+    public function setOrderCart(?OrderCart $orderCart): static
+    {
+        $this->orderCart = $orderCart;
+
+        return $this;
+    }
+
+    public function getOrderRef(): ?OrderCart
+    {
+        return $this->OrderRef;
+    }
+
+    public function setOrderRef(?OrderCart $OrderRef): static
+    {
+        $this->OrderRef = $OrderRef;
+
+        return $this;
     }
 }

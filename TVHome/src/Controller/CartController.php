@@ -19,7 +19,7 @@ class CartController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $cart->setUpdatedAt(new \DateTimeImmutable());
+            $cart->setUpdateAt(new \DateTimeImmutable());
             $cartManager->save($cart);
 
             return $this->redirectToRoute('cart');

@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\DienThoai;
+use App\Entity\Order;
 use App\Entity\Product;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -23,6 +23,7 @@ class DashboardController extends AbstractDashboardController
         //
          $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
          return $this->redirect($adminUrlGenerator->setController(UserCrudController::class)->generateUrl());
+         
 
         // Option 2. You can make your dashboard redirect to different pages depending on the user
         //
@@ -39,7 +40,9 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('TVHome');
+            ->setTitle('TVHome')
+            ->setFaviconPath('assets/favicon.svg')
+            ->setTranslationDomain('/');
     }
 
     public function configureMenuItems(): iterable
@@ -47,6 +50,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Trang chủ', 'fa fa-home');
         yield MenuItem::linkToCrud('Người dùng', 'fas fa-user', User::class);
         yield MenuItem::linkToCrud('Sản phẩm', 'fas fa-list', Product::class);
+        //yield MenuItem::linkToCrud('Đơn hàng', 'fas fa-list', Order::class);
+
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

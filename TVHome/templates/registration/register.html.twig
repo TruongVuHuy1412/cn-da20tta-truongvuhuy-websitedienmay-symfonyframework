@@ -6,7 +6,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet"/>
 <link rel="icon" href="assets/favicon.svg">
 
-<section class="vh-100" style="background-color: #508bfc;">
+<section class="vh-150" style="background-color: #508bfc;">
     <div class="container py-5 h-200">
         <div class="row d-flex justify-content-center align-items-center h-200">
           <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -14,28 +14,59 @@
               <div class="card-body p-5 text-center">
 
                 <form method="post">
-                    <h3>Đăng ký</h3>
+                    <h3 class=" mb-4">Đăng ký</h3>
 
                     {{ form_start(registrationForm) }}
+                    <div class="row">
+                      <div class="col-md-5">
+                          <div class="form-outline mb-4">
+                              {{ form_widget(registrationForm.lastname, {attr: {'class': 'form-control', 'id': 'registerLastName'}}) }}
+                              <label class="form-label" for="registerLastName">Họ</label>
+                              {% if form_errors(registrationForm.lastname) %}
+                                  <div class="alert alert-danger">
+                                      {{ form_errors(registrationForm.lastname) }}
+                                  </div>
+                              {% endif %}
+                          </div>
+                      </div>
+                      <div class="col-md-7">
+                          <div class="form-outline mb-4">
+                              {{ form_widget(registrationForm.name, {attr: {'class': 'form-control', 'id': 'registerName'}}) }}
+                              <label class="form-label" for="registerName">Tên</label>
+                              {% if form_errors(registrationForm.name) %}
+                                  <div class="alert alert-danger">
+                                      {{ form_errors(registrationForm.name) }}
+                                  </div>
+                              {% endif %}
+                          </div>
+                      </div>
+                  </div>
+                  
+
                     <div class="form-outline mb-4">
-                      {{ form_widget(registrationForm.lastname, {attr: {'class': 'form-control', 'id': 'registerLastName'}}) }}
-                      <label class="form-label" for="registerLastName">Họ</label>
+                      {{ form_widget(registrationForm.phone_number, {attr: {'class': 'form-control', 'id': 'registerPhone'}}) }}
+                      <label class="form-label" for="registerPhone">Số điện thoại</label>
                     </div>
-                    {% if form_errors(registrationForm.lastname) %}
+                    {% if form_errors(registrationForm.phone_number) %}
                       <div class="alert alert-danger">
-                        {{ form_errors(registrationForm.lastname) }}
+                        {{ form_errors(registrationForm.phone_number) }}
                       </div>
                     {% endif %}
 
                     <div class="form-outline mb-4">
-                      {{ form_widget(registrationForm.name, {attr: {'class': 'form-control', 'id': 'registerName'}}) }}
-                      <label class="form-label" for="registerName">Tên</label>
+                      {{ form_widget(registrationForm.address, {attr: {'class': 'form-control', 'id': 'registerAddress'}}) }}
+                      <label class="form-label" for="registerAddress">Địa chỉ</label>
                     </div>
-                    {% if form_errors(registrationForm.name) %}
+                    {% if form_errors(registrationForm.address) %}
                       <div class="alert alert-danger">
-                        {{ form_errors(registrationForm.name) }}
+                        {{ form_errors(registrationForm.address) }}
                       </div>
                     {% endif %}
+
+                    <div class="form-outline mb-4">
+                      {{ form_widget(registrationForm.email, {attr: {'class': 'form-control', 'id': 'registerEmail'}}) }}
+                      <label class="form-label" for="registerEmail">Email (nếu có)</label>
+                    </div>
 
                     <div class="form-outline mb-4">
                       {{ form_widget(registrationForm.username, {attr: {'class': 'form-control', 'id': 'registerUsername'}}) }}

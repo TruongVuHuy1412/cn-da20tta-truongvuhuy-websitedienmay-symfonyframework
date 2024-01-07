@@ -17,112 +17,90 @@ class Order
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToMany(mappedBy: 'Ordered', targetEntity: OrderItem::class, cascade: ["persist", "remove"], orphanRemoval: true)]
-    private Collection $item;
-
     #[ORM\Column]
-    private ?string $status = self::STATUS_CART;
+    private ?\DateTimeImmutable $CreateAt = null;
 
-    const STATUS_CART = 'cart';
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $CreatedAt = null;
+    #[ORM\Column(length: 255)]
+    private ?string $Fullname = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $UpdatedAt = null;
+    #[ORM\Column(length: 255)]
+    private ?string $PhoneNumber = null;
 
-    public function __construct()
-    {
-        $this->item = new ArrayCollection();
-    }
+    #[ORM\Column(length: 255)]
+    private ?string $Address = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Message = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return Collection<int, OrderItem>
-     */
-    public function getItem(): Collection
+
+    public function getCreateAt(): ?\DateTimeImmutable
     {
-        return $this->item;
+        return $this->CreateAt;
     }
 
-    public function addItem(OrderItem $item): self
+    public function setCreateAt(\DateTimeImmutable $CreateAt): static
     {
-        foreach ($this->getItem() as $existingItem) {
-            // The item already exists, update the quantity
-            if ($existingItem->equals($item)) {
-                $existingItem->setQuantity(
-                    $existingItem->getQuantity() + $item->getQuantity()
-                );
-                return $this;
-            }
-        }
+        $this->CreateAt = $CreateAt;
+
+        return $this;
+    }
+
     
-        $this->item[] = $item;
-        $item->setOrdered($this);
+
+    public function getFullname(): ?string
+    {
+        return $this->Fullname;
+    }
+
+    public function setFullname(string $Fullname): static
+    {
+        $this->Fullname = $Fullname;
 
         return $this;
     }
 
-    public function removeItem(OrderItem $item): self
+    public function getPhoneNumber(): ?string
     {
-        $this->item->removeElement($item);
+        return $this->PhoneNumber;
+    }
+
+    public function setPhoneNumber(string $PhoneNumber): static
+    {
+        $this->PhoneNumber = $PhoneNumber;
 
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getAddress(): ?string
     {
-        return $this->status;
+        return $this->Address;
     }
 
-    public function setStatus(string $Status): self
+    public function setAddress(string $Address): static
     {
-        $this->status = $Status;
+        $this->Address = $Address;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getMessage(): ?string
     {
-        return $this->CreatedAt;
+        return $this->Message;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $CreatedAt): static
+    public function setMessage(?string $Message): static
     {
-        $this->CreatedAt = $CreatedAt;
+        $this->Message = $Message;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->UpdatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeImmutable $UpdatedAt): static
-    {
-        $this->UpdatedAt = $UpdatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Tổng đơn hàng.
-     *
-     * @return float
-     */
-    public function getTotal(): float
-    {
-        $total = 0;
-
-        foreach ($this->getItem() as $item) {
-            $total += $item->getTotal();
-        }
-
-        return $total;
-}
 }

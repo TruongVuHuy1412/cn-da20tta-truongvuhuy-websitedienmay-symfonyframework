@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Mime\Message;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -39,6 +40,26 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('phone_number', TextType::class, [
+                'label' => 'Số điện thoại ',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vui lòng nhập số điện thoại !',
+                    ]),
+                ],
+            ])
+            ->add('address', TextType::class, [
+                'label' => 'Địa chỉ',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Vui lòng nhập địa chỉ !',
+                    ]),
+                ],
+            ])
+            ->add('email', EmailType::class, [
+                'label' => 'Email',
+                ]
+            )
             ->add('username', TextType::class, [
                 'label' => 'Tên đăng nhập ',
                 'constraints' => [

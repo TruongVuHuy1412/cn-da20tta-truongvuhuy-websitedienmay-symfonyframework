@@ -2,8 +2,8 @@
 
 namespace App\Storage;
 
-use App\Entity\Order;
-use App\Repository\OrderRepository;
+use App\Entity\OrderCart;
+use App\Repository\OrderCartRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -19,7 +19,7 @@ class CartSessionStorage
     /**
      * The cart repository.
      *
-     * @var OrderRepository
+     * @var OrderCartRepository
      */
     private $cartRepository;
 
@@ -32,9 +32,9 @@ class CartSessionStorage
      * CartSessionStorage constructor.
      *
      * @param RequestStack $requestStack
-     * @param OrderRepository $cartRepository
+     * @param OrderCartRepository $cartRepository
      */
-    public function __construct(RequestStack $requestStack, OrderRepository $cartRepository)
+    public function __construct(RequestStack $requestStack, OrderCartRepository $cartRepository)
     {
         $this->requestStack = $requestStack;
         $this->cartRepository = $cartRepository;
@@ -43,22 +43,22 @@ class CartSessionStorage
     /**
      * Gets the cart in session.
      *
-     * @return Order|null
+     * @return OrderCart|null
      */
-    public function getCart(): ?Order
+    public function getCart(): ?OrderCart
     {
         return $this->cartRepository->findOneBy([
             'id' => $this->getCartId(),
-            'status' => Order::STATUS_CART
+            //'status' => OrderCart::STATUS_CART
         ]);
     }
 
     /**
      * Sets the cart in session.
      *
-     * @param Order $cart
+     * @param OrderCart $cart
      */
-    public function setCart(Order $cart): void
+    public function setCart(OrderCart $cart): void
     {
         $this->getSession()->set(self::CART_KEY_NAME, $cart->getId());
     }

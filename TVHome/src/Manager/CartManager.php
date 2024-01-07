@@ -2,7 +2,7 @@
 
 namespace App\Manager;
 
-use App\Entity\Order;
+use App\Entity\OrderCart;
 use App\Factory\OrderFactory;
 use App\Storage\CartSessionStorage;
 use Doctrine\ORM\EntityManagerInterface;
@@ -46,9 +46,9 @@ class CartManager
     }
     /**
      * 
-     * @return Order
+     * @return OrderCart
      */
-    public function getCurrentCart(): Order
+    public function getCurrentCart(): OrderCart
     {
         $cart = $this->cartSessionStorage->getCart();
 
@@ -62,9 +62,9 @@ class CartManager
     /**
      * Duy trì giỏ hàng trong cơ sở dữ liệu và phiên.
      *
-     * @param Order $cart
+     * @param OrderCart $cart
      */
-    public function save(Order $cart): void
+    public function save(OrderCart $cart): void
     {
         // Persist in database
         $this->entityManager->persist($cart);

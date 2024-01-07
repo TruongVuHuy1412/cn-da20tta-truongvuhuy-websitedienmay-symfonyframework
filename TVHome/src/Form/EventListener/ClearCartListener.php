@@ -3,7 +3,7 @@
 namespace App\Form\EventListener;
 
 use App\Storage\CartSessionStorage;
-use App\Entity\Order;
+use App\Entity\OrderCart;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -28,7 +28,7 @@ class ClearCartListener implements EventSubscriberInterface
         $form = $event->getForm();
         $cart = $form->getData();
 
-        if (!$cart instanceof Order) {
+        if (!$cart instanceof OrderCart) {
             return;
         }
 

@@ -31,6 +31,9 @@ class Product
     #[ORM\OneToMany(mappedBy: 'Product', targetEntity: OrderItem::class)]
     private Collection $OderItem;
 
+    #[ORM\Column]
+    private ?int $Quantity = null;
+
     public function __construct()
     {
         $this->OderItem = new ArrayCollection();
@@ -122,6 +125,18 @@ class Product
                 $oderItem->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->Quantity;
+    }
+
+    public function setQuantity(int $Quantity): static
+    {
+        $this->Quantity = $Quantity;
 
         return $this;
     }

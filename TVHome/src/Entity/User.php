@@ -52,6 +52,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $plainPassword;
 
+    #[ORM\Column(length: 255)]
+    private ?string $PhoneNumber = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $Address = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Email = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Image = null;
+
     public function getPlainPassword()
     {
         return $this->plainPassword;
@@ -172,6 +187,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setName(string $Name): static
     {
         $this->Name = $Name;
+
+        return $this;
+    }
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->PhoneNumber;
+    }
+
+    public function setPhoneNumber(string $PhoneNumber): static
+    {
+        $this->PhoneNumber = $PhoneNumber;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->Address;
+    }
+
+    public function setAddress(string $Address): static
+    {
+        $this->Address = $Address;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->Email;
+    }
+
+    public function setEmail(?string $Email): static
+    {
+        $this->Email = $Email;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->Image;
+    }
+
+    public function setImage(?string $Image): static
+    {
+        $this->Image = $Image;
 
         return $this;
     }

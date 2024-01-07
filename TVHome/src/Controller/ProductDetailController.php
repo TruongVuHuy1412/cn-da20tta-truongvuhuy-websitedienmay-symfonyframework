@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProductDetailController extends AbstractController
 {
-    #[Route('/productdetail/{id}', name: 'product.detail')]
+    #[Route('/productdetail/{id}', name: 'productdetail')]
     public function detail(Product $product, Request $request, CartManager $cartManager): Response
     {
         $form = $this->createForm(AddToCartType::class);
@@ -27,11 +27,11 @@ class ProductDetailController extends AbstractController
             $cart = $cartManager->getCurrentCart();
             $cart
                 ->addItem($item)
-                ->setUpdatedAt(new \DateTimeImmutable());
+                ->setUpdateAt(new \DateTimeImmutable());
 
             $cartManager->save($cart);
 
-            return $this->redirectToRoute('product.detail', ['id' => $product->getId()]);
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('product_detail/index.html.twig', [
