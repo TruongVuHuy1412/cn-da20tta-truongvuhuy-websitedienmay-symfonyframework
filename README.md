@@ -1,7 +1,9 @@
 # Xây dựng website siêu thị điện máy với Symfony framework
 Lược đồ cơ sở dữ liệu:
 ![image](https://github.com/TruongVuHuy1412/cn-da20tta-truongvuhuy-websitedienmay-symfonyframework/assets/112933002/c0ecf962-4d5a-49f0-a5b7-471a7ca5cfc7)
+
 Giao diện của website:
+
 ![image](https://github.com/TruongVuHuy1412/cn-da20tta-truongvuhuy-websitedienmay-symfonyframework/assets/112933002/b7ea77ef-cfb5-4e1c-b6a4-663f1c0f1ab9)
 
 ![image](https://github.com/TruongVuHuy1412/cn-da20tta-truongvuhuy-websitedienmay-symfonyframework/assets/112933002/e05a94a5-e113-4e05-91b1-dae22d05c079)
