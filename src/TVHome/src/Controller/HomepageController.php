@@ -11,8 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class HomepageController extends AbstractController
 {
+    #[Route('{_locale<%app.supported_locales%>}')]
     #[Route('/', name: 'homepage')]
     public function index(ProductRepository $productRepository, Request $request): Response
     {

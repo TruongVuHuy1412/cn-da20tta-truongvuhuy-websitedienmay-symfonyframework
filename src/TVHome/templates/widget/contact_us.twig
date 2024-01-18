@@ -1,0 +1,46 @@
+
+
+<div class="modal fade" id="ContactUsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Liên hệ với chúng tôi</h5>
+          <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            {% if success is not null %}
+                <div class="alert alert-success" role="alert">
+                    {{ success }}
+                </div>
+            {% else %}
+                {{ form_start(form, {action: path('contact')}) }}
+                {{ form(form) }}
+            {% endif %}
+          <!-- <form>
+            <div class="mb-3">
+              <label for="name" class="col-form-label">Họ và tên:</label>
+              <input type="text" class="form-control" id="name" />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="col-form-label">Email:</label>
+              <input type="text" class="form-control" id="email" />
+            </div>
+            <div class="mb-3">
+                <label for="title" class="col-form-label">Tiêu đề:</label>
+                <input type="text" class="form-control" id="title" />
+              </div>
+              <div class="mb-3">
+                <label for="content" class="col-form-label">Nội dung:</label>
+                <textarea class="form-control" id="content"></textarea>
+              </div>
+          </form> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-mdb-ripple-init data-mdb-dismiss="modal">Đóng</button>
+          <button type="button" class="btn btn-primary" data-mdb-ripple-init>Gửi</button>
+        </div>-->
+      </div>
+    </div>
+  </div>
+
+  <script src="{{asset('assets/js/contact.js')}}"> </script>

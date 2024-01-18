@@ -56,16 +56,15 @@
                               
                               <li>
                                 <div class="dropdown">
-                                  <a class="dropdown-toggle text-white" href="#" id="Dropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false"> <i class="flag-vn flag"></i>tiếng Việt</a>
+                                  <a class="dropdown-toggle text-white" href="#" id="Dropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false"> <i class="flag-vn flag"></i>Tiếng Việt</a>
                                   <ul class="dropdown-menu "  >
                                     <li>
-                                      <a class="dropdown-item" href="#"><i class="flag-vn flag"></i>tiếng Việt<i class="fa fa-check text-success ms-2"></i></a>
+                                      <a class="dropdown-item" href="#"><i class="flag-vn flag"></i>Tiếng Việt<i class="fa fa-check text-success ms-2"></i></a>
                                     </li>
                                     <li>
-                                      <a class="dropdown-item" href="#"><i class="flag-united-kingdom flag"></i>English </a>
+                                      <a class="dropdown-item" href="#"><i class="flag-united-kingdom flag"></i>English</a>
                                     </li>
                                   </ul>
-                                  </a>
                                 </div>   
                               </li>
                             </ul>
@@ -74,15 +73,15 @@
                     <div class="col-lg-4 col-md-4 col-12">
                         <div class="top-middle">
                             <ul class="useful-links">
-                                <li><a href="/">Trang chủ</a></li>
-                                <li><a href="#">Giới thiệu</a></li>
-                                <li><a href="#">Liên hệ</a></li>
+                              <li><a href="/">{{'trangchu'|trans({}, 'homepage')|raw}}</a></li>
+                              <li><a href="#">{{'gioithieu'|trans({}, 'homepage')|raw}}</a></li>
+                              <li><a href="#">{{'lienhe'|trans({}, 'homepage')|raw}}</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-12">
                         <div class="d-flex align-items-center justify-content-end">
-                          <span class="me-2">Xin chào {{app.user.username}} </span>
+                          <span class="me-2">{{'xinchao'|trans({}, 'homepage')|raw}} {{app.user.username}} </span>
                           <div class="dropdown">
                             <a
                               data-mdb-dropdown-init
@@ -102,10 +101,10 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                               <li>
-                                <a class="dropdown-item" href="/profile">Tài khoản</a>
+                                <a class="dropdown-item" href="/profile">{{'taikhoan'|trans({}, 'homepage')|raw}}</a>
                               </li>
                               <li>
-                                <a class="dropdown-item" href="{{ path('app_logout') }}">Đăng xuất</a>
+                                <a class="dropdown-item" href="{{ path('app_logout') }}">{{'dangxuat'|trans({}, 'homepage')|raw}}</a>
                               </li>
                             </ul>
                           </div>
@@ -135,7 +134,7 @@
                 <i class="fas fa-phone m-1 me-md-2"></i><p class="d-none d-md-block mb-0">
                 Hotline:(+100) 123 456 7890</p>
               </div>
-              <a href="/cart" class="border rounded py-1 px-3 nav-link d-flex align-items-center"> <i class="fas fa-shopping-cart m-1 me-md-2"></i><p class="d-none d-md-block mb-0">Giỏ hàng</p> </a>
+              <a href="/cart" class="border rounded py-1 px-3 nav-link d-flex align-items-center"> <i class="fas fa-shopping-cart m-1 me-md-2"></i><p class="d-none d-md-block mb-0">{{'giohang'|trans({}, 'homepage')|raw}}</p> </a>
             </div>
           </div>
           <!-- Center elements -->
@@ -145,7 +144,7 @@
             <div class="input-group float-center">
               <div class="form-outline">
                 <input type="search" id="form1" class="form-control" />
-                <label class="form-label" for="form1">Tìm kiếm sản phẩm...</label>
+                <label class="form-label" for="form1">{{'timkiem'|trans({}, 'homepage')|raw}}</label>
               </div>
               <button type="button" class="btn btn-primary shadow-0">
                 <i class="fas fa-search"></i>
@@ -168,17 +167,16 @@
                                 
                                 <li>
                                   <div class="dropdown">
-                                    <a class="dropdown-toggle text-white" href="#" id="Dropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false"> <i class="flag-vn flag"></i>tiếng Việt</a>
+                                    <a class="dropdown-toggle text-white" href="#" id="Dropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">{{'ngonngu'|trans({}, 'homepage')|raw}}</a>
                                     <ul class="dropdown-menu "  >
                                       <li>
-                                        <a class="dropdown-item" href="#"><i class="flag-vn flag"></i>tiếng Việt<i class="fa fa-check text-success ms-2"></i></a>
+                                        <a class="dropdown-item" href="{{path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({_locale: 'vn'})) }}"><i class="flag-vn flag"></i>Tiếng Việt</a>
                                       </li>
                                       <li>
-                                        <a class="dropdown-item" href="#"><i class="flag-united-kingdom flag"></i>English </a>
+                                        <a class="dropdown-item" href="{{path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({_locale: 'en'})) }}"><i class="flag-united-kingdom flag"></i>English</a>
                                       </li>
                                     </ul>
-                                    </a>
-                                  </div>   
+                                  </div>  
                                 </li>
                             </ul>
                         </div>
@@ -186,9 +184,9 @@
                     <div class="col-lg-4 col-md-4 col-12">
                         <div class="top-middle">
                             <ul class="useful-links">
-                                <li><a href="/">Trang chủ</a></li>
-                                <li><a href="#">Giới thiệu</a></li>
-                                <li><a href="#" >Liên hệ</a></li>
+                                <li><a href="/">{{'trangchu'|trans({}, 'homepage')|raw}}</a></li>
+                                <li><a href="#">{{'gioithieu'|trans({}, 'homepage')|raw}}</a></li>
+                                <li><a href="#" data-mdb-modal-init data-mdb-target="#ContactUsModal">{{'lienhe'|trans({}, 'homepage')|raw}}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -196,10 +194,10 @@
                         <div class="top-end">
                             <ul class="user-login">
                                 <li>
-                                    <a href="/login">Đăng nhập</a>
+                                    <a href="/login">{{'dangnhap'|trans({}, 'homepage')|raw}}</a>
                                 </li>
                                 <li>
-                                    <a href="/register">Đăng ký</a>
+                                    <a href="/register">{{'dangky'|trans({}, 'homepage')|raw}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -227,7 +225,7 @@
                 <i class="fas fa-phone m-1 me-md-2"></i><p class="d-none d-md-block mb-0">
                 Hotline:(+84) 123 456 7890</p>
               </div>
-              <a href="/cart" class="border rounded py-1 px-3 nav-link d-flex align-items-center"> <i class="fas fa-shopping-cart m-1 me-md-2"></i><p class="d-none d-md-block mb-0">Giỏ hàng</p> </a>
+              <a href="/cart" class="border rounded py-1 px-3 nav-link d-flex align-items-center"> <i class="fas fa-shopping-cart m-1 me-md-2"></i><p class="d-none d-md-block mb-0">{{'giohang'|trans({}, 'homepage')|raw}}</p> </a>
             </div>
           </div>
           <!-- Center elements -->
@@ -237,7 +235,7 @@
             <div class="input-group float-center">
               <div class="form-outline">
                 <input type="search" id="form1" class="form-control" />
-                <label class="form-label" for="form1">Tìm kiếm sản phẩm...</label>
+                <label class="form-label" for="form1">{{'timkiem'|trans({}, 'homepage')|raw}}</label>
               </div>
               <button type="button" class="btn btn-primary shadow-0">
                 <i class="fas fa-search"></i>
@@ -350,7 +348,8 @@
           
         </footer>
         <!-- Footer -->
-        
+        {{render(controller('App\\Controller\\ContactController::index'))}}
+
         <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/main.js"></script>
         <!-- MDB -->

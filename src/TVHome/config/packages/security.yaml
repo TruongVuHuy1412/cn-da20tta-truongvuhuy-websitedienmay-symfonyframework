@@ -16,7 +16,8 @@ security:
         main:
             lazy: true
             provider: app_user_provider
-            custom_authenticator: App\Security\TVHomeAuthenticator
+            custom_authenticator:
+                - App\Security\TVHomeAuthenticator
             logout:
                 path: app_logout
                 # where to redirect after logout
